@@ -7,19 +7,19 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates :last_name, format: {
-      with: /\A[ぁ-んァ-ヶ一-龥々一]+\z/
+      with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/
       # message: 'は漢字、ひらがな、カタカナのみで入力してください'
     }
     validates :last_name_kana, format: {
-      with: /\A[ァ-ヶ一]+\z/
+      with: /\A[ァ-ヶー]+\z/
       # message: 'はカタカナのみで入力してください'
     }
     validates :first_name, format: {
-      with: /\A[ぁ-んァ-ヶ一-龥々一]+\z/
+      with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/
       # message: 'は漢字、ひらがな、カタカナのみで入力してください'
     }
     validates :first_name_kana, format: {
-      with: /\A[ァ-ヶ一]+\z/
+      with: /\A[ァ-ヶー]+\z/
       # message: 'はカタカナのみで入力してください'
     }
     validates :birthday
