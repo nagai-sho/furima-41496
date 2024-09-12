@@ -18,6 +18,25 @@
 - has_many :orders
 - has_many :items
 
+## items Table
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| product                   | string     | null: false                    |
+| price                     | integer    | null: false                    |
+| explain                   | text       | null: false                    |
+| category_id               | integer    | null: false                    |
+| condition_id              | integer    | null: false                    |
+| shipping_fee_id           | integer    | null: false                    |
+| prefecture_id             | integer    | null: false                    |
+| required_number_of_day_id | integer    | null: false                    |
+| user                      | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- has_one :order
+
 ## orders Table
 
 | Column | Type       | Options                        |
@@ -46,22 +65,3 @@
 ### Association
 
 - belongs_to :order
-
-## items Table
-
-| Column                    | Type       | Options                        |
-| ------------------------- | ---------- | ------------------------------ |
-| product                   | string     | null: false                    |
-| price                     | integer    | null: false                    |
-| explain                   | text       | null: false                    |
-| category_id               | integer    | null: false                    |
-| condition_id              | integer    | null: false                    |
-| shipping_fee_id           | integer    | null: false                    |
-| prefecture_id             | integer    | null: false                    |
-| required_number_of_day_id | integer    | null: false                    |
-| user                      | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- has_one :order
