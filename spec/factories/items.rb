@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :item do
+    association :user
     product { Faker::Lorem.sentence }
     explain { Faker::Lorem.sentence }
     price   { Faker::Number.between(from: 300, to: 1_000_000) }

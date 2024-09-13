@@ -3,12 +3,16 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @items = Item.new
+    if user_signed_in?
+      @item = Item.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
-    @items = Item.create(item_params)
-    if @items.save
+    @item = Item.create(item_params)
+    if @item.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
