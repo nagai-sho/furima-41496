@@ -7,11 +7,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = item.create(params[:id])
-    if @item.save
+    @items = Item.create(item_params)
+    if @items.save
       redirect_to root_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       :condition_id,
       :shipping_fee_id,
       :prefecture_id,
-      :require_number_of_day_id
+      :required_number_of_day_id
     ).merge(user_id: current_user.id)
   end
 end

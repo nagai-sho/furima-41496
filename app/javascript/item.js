@@ -10,7 +10,7 @@ function list() {
     const salesProfit = price - commission;
     profit.textContent = salesProfit;
   });
-  console.log('これはテストです');
 }
 
 window.addEventListener('turbo:load', list);
+window.addEventListener('turbo:render', list);

@@ -7,18 +7,22 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :required_number_of_day
 
+  validates :category_id, :condition_id, :shipping_fee_id, :prefecture_id, :required_number_of_day_id,
+            numericality: { other_than: 1, message: "can't be blank" }
+
+  validates :price, presence: true, numericality: {
+    greater_than_or_equal_to: 300,
+    less_than_or_equal_to: 9_999_999
+  }
+
   with_options presence: true do
     validates :image
     validates :product
     validates :explain
-    validates :price
     validates :category_id
     validates :condition_id
     validates :shipping_fee_id
     validates :prefecture_id
-    validates :require_number_of_day_id
+    validates :required_number_of_day_id
   end
-
-  validates :category_id, :condition_id, :shipping_fee, :prefecture, :required_number_of_day,
-            numericality: { other_than: 1, message: "can't be blank" }
 end
