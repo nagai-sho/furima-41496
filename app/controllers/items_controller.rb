@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_item, only: [:show, :edit, :update]
+
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -21,7 +24,20 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def edit
+    return if current_user.id == @item.user_id
+
+    redirect_to new_user_session_path
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -38,5 +54,9 @@ class ItemsController < ApplicationController
       :prefecture_id,
       :required_number_of_day_id
     ).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
