@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.order(created_at: :desc)
+    @items = Item.includes(:order).order(created_at: :desc)
   end
 
   def new
@@ -27,9 +27,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if current_user.id == @item.user_id
-
-    redirect_to new_user_session_path
+    if @item.order.present?
+      redirect_to root_path
+    elsif current_user.id != @item.user_id
+      redirect_to new_user_session_path
+    end
   end
 
   def update
@@ -65,6 +67,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:order).find(params[:id])
   end
 end
