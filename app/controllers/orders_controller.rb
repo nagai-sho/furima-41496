@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_address = OrderAddress.new
-    @item = Item.includes(:order).find(params[:item_id])
     if current_user.id == @item.user_id
       redirect_to root_path
     elsif @item.order.present?
