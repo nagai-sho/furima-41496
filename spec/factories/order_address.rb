@@ -7,6 +7,7 @@ FactoryBot.define do
     house_number  { '1-2-3番地' }
     building      { Faker::Lorem.sentence }
     phone_number  { '12345678900' }
-    item_id       { 1 }
+    user_id       { nil }
+    item_id       { nil }
   end
 end
