@@ -65,3 +65,5 @@
 ### Association
 
 - belongs_to :order
+
+### deploy 先：render
